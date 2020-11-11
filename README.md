@@ -23,17 +23,21 @@ For more info on configuring your Raspberry Pi for this to work, go to https://g
 * Create file docker-compose.yml
 
 ```yml
+---
 version: "3.3"
 services:
-  rpi-spotify:
+  raSpotify:
     image: flaviostutz/rpi-spotify
     network_mode: host
     restart: always
     devices:
       - /dev/snd:/dev/snd
+    volumes:
+      - "/mnt/share/daapd_music:/mnt/share/daapd_music"
     environment:
-      - SPOTIFY_NAME=MyHouse
-      - EQUALIZATION=rock
+      - SPOTIFY_NAME=Jukebox
+      - BACKEND_NAME=pipe
+      - DEVICE_NAME=/mnt/share/daapd_music/spotify
 ```
 
 * Run ```docker-compose up -d```
